@@ -16,14 +16,23 @@ public class JpaMain {
         tx.begin();
 
         try {
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-            Member member = em.find(Member.class, 1L);
+            // 1차 캐시에 저장되는 것 확인용
 
-            member.setName("수정"); // persist 안해줘도 정상작동함.
+            // 비영속
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("HelloJPA");
 
-//            em.persist(member);
+            // 영속
+            System.out.println("=== BEFORE ===");
+            em.persist(member); // 1차 캐시에 저장
+            System.out.println("=== AFTER ===");
+
+            // 1차 캐시로부터 가져옴 (select 문이 안나감)
+            Member foundMember = em.find(Member.class, 101L);
+
+            System.out.println("foundMember.id = " + foundMember.getId());
+            System.out.println("foundMember.name = " + foundMember.getName());
 
             tx.commit();
         } catch (Exception e) {
