@@ -39,12 +39,20 @@ public class JpaMain {
 //
 //            tx.commit();
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZ");
-
-            System.out.println("========");
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("ZZZZ");
+//
+//            System.out.println("========");
 
             // persist 없이도 setter 통해서만 커밋 시점에 update 쿼리 날라가는 것 확인
+
+            Member member = new Member();
+            member.setId(2L);
+            member.setUsername("B");
+            member.setRoleType(RoleType.ADMIN);
+
+            em.persist(member);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
