@@ -47,9 +47,8 @@ public class JpaMain {
             // persist 없이도 setter 통해서만 커밋 시점에 update 쿼리 날라가는 것 확인
 
             Member member = new Member();
-            member.setId(2L);
+//            member.setId("ID_A");
             member.setUsername("B");
-            member.setRoleType(RoleType.ADMIN);
 
             em.persist(member);
 
